@@ -7,8 +7,10 @@ ThisBuild / organizationName := "example"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "StreaemPerf",
-    libraryDependencies += scalaTest % Test
+    name := "StreamPerf",
+    libraryDependencies ++= Seq(
+      scalaTest % Test,
+      fs2_core % Compile)
   )
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
@@ -54,3 +56,5 @@ scalacOptions ++= Seq(
   "-Ycache-plugin-class-loader:last-modified", // Enables caching of classloaders for compiler plugins
   "-Ycache-macro-class-loader:last-modified", // and macro definitions. This can lead to performance improvements.
 )
+
+enablePlugins(JmhPlugin)
