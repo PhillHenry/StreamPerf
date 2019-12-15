@@ -2,9 +2,10 @@ package uk.co.odinconsultants.fp.performance.count
 
 import java.util.concurrent.TimeUnit
 
-import cats.effect.{IO, Sync}
+import cats.effect.IO
 import fs2.Stream
 import org.openjdk.jmh.annotations.{Benchmark, BenchmarkMode, Mode, OutputTimeUnit}
+import uk.co.odinconsultants.fp.performance.count.Assertions.checkCount
 import uk.co.odinconsultants.fp.performance.count.Data._
 
 /**
@@ -20,15 +21,11 @@ class JMH_FS2_Count {
     val io = for {
       stream  <- IO.delay { Stream.emits(list).covary[IO] }
       count   <- stream.chunkLimit(4096 * 256).compile.fold(0) { (acc, b) => acc + b.size }
-      _       <- printCount[IO](count)
+      _       <- checkCount[IO](count)
     } yield ()
 
     io.unsafeRunSync()
   }
 
-
-  def printCount[F[_]](count: Int)(implicit F: Sync[F]): F[Unit] = if (count != N)
-    F.raiseError(new Throwable("" + count))
-  else F.unit
 
 }
