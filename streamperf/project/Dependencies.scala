@@ -6,6 +6,8 @@ object Dependencies {
   val scala_library = "org.scala-lang" % "scala-library" % "${scala.version}"
   val junit = "junit" % "junit" % "4.11" % "test"
   val scalatest = "org.scalatest" % "scalatest_2.13" % "3.0.3" % "test"
+  val zio = "dev.zio" %% "zio" % "1.0.0-RC18-2"
+  val zio_streams = "dev.zio" %% "zio-streams" % "1.0.0-RC18-2"
   val scalaz_core = "org.scalaz" % "scalaz-core_2.13" % "7.2.14"
   val scalaz_effect = "org.scalaz" % "scalaz-effect_2.13" % "7.2.14"
   val scalaz_zio = "org.scalaz" % "scalaz-zio_2.13" % "0.5.3"
