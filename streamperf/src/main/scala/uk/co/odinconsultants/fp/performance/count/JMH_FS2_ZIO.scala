@@ -1,10 +1,10 @@
 package uk.co.odinconsultants.fp.performance.count
 
 import java.util.concurrent.TimeUnit
-import zio.ZIO
-import zio.stream._
 
 import org.openjdk.jmh.annotations.{Benchmark, BenchmarkMode, Mode, OutputTimeUnit}
+import zio.ZIO
+import zio.stream._
 
 class JMH_FS2_ZIO {
   @Benchmark
@@ -20,7 +20,7 @@ class JMH_FS2_ZIO {
         ZIO.unit
       }
     }
-    task.run
+    zio.Runtime.default.unsafeRunSync(task)
     ()
   }
 }
